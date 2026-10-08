@@ -1,0 +1,67 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/.next*/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+# used only by builds into a private .next-<name> folder (see next.config.ts)
+tsconfig.private.json
+
+# old JSON store (before Postgres): `npm run db:import`, then delete
+/data/
+
+# keep the env template
+!.env.example
+
+# original full-size photos (optimised copies live in public/images)
+/info/photos/originals/
+
+# Private source material (contains confidential client names) - never publish
+/info/*
+!/info/index.html
+
+# Local administrator recovery codes
+/Portfolio Website Admin Backup Codes.txt
+
+# Generated persona documents (PDFs printed at publish, served by /d/<file>)
+/var/
+
+# AI eval results (npm run eval)
+/evals/results/
+.neon
