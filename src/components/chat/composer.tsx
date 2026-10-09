@@ -126,7 +126,7 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer({ on
                   >
                     {o.kind === "ask" ? (
                       <>
-                        <Sparkles className="size-[18px] shrink-0 text-accent" aria-hidden="true" />
+                        <Sparkles className="size-4.5 shrink-0 text-accent" aria-hidden="true" />
                         <span className="min-w-0 flex-1">
                           <span className="block truncate font-semibold">Ask: &ldquo;{q}&rdquo;</span>
                           <span className="block truncate text-sm text-muted">{matches.length ? labels.askHint : labels.askHintNoMatch}</span>
@@ -134,7 +134,7 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer({ on
                       </>
                     ) : (
                       <>
-                        <QIcon name={o.intent.icon} className="size-[18px] shrink-0 text-faint" />
+                        <QIcon name={o.intent.icon} className="size-4.5 shrink-0 text-faint" />
                         <span className="min-w-0 flex-1">
                           <span className="block font-semibold">{o.intent.label}</span>
                           <span className="block truncate text-sm text-muted">{o.intent.prompt}</span>
@@ -176,7 +176,7 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer({ on
           enterKeyHint="send"
           autoComplete="off"
           spellCheck={false}
-          className="min-w-0 flex-1 bg-transparent py-2.5 text-[17px] font-medium outline-none placeholder:font-normal placeholder:text-faint"
+          className="public-composer-input min-w-0 flex-1 bg-transparent py-2.5 font-medium outline-none placeholder:font-normal placeholder:text-faint"
         />
         <button
           type="button"

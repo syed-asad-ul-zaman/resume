@@ -38,7 +38,7 @@ export function PersonaShell({ p, children }: { p: ResolvedPersona; children: Re
         </div>
       </header>
 
-      <main id="main" className="mx-auto w-full max-w-3xl px-5 py-10 md:px-6 md:py-14">
+      <main id="main" className="public-main mx-auto w-full max-w-3xl">
         {children}
       </main>
 

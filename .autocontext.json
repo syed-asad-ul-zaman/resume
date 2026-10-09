@@ -1,0 +1,206 @@
+{
+    "version": "0.9.5",
+    "instructions": {
+        "lang-bash.instructions.md": {
+            "enabled": false
+        },
+        "lang-batch.instructions.md": {
+            "enabled": false
+        },
+        "lang-c.instructions.md": {
+            "enabled": false
+        },
+        "lang-csharp.instructions.md": {
+            "enabled": false
+        },
+        "lang-cpp.instructions.md": {
+            "enabled": false
+        },
+        "lang-dart.instructions.md": {
+            "enabled": false
+        },
+        "lang-fsharp.instructions.md": {
+            "enabled": false
+        },
+        "lang-go.instructions.md": {
+            "enabled": false
+        },
+        "lang-graphql.instructions.md": {
+            "enabled": false
+        },
+        "lang-groovy.instructions.md": {
+            "enabled": false
+        },
+        "lang-java.instructions.md": {
+            "enabled": false
+        },
+        "lang-kotlin.instructions.md": {
+            "enabled": false
+        },
+        "lang-lua.instructions.md": {
+            "enabled": false
+        },
+        "lang-php.instructions.md": {
+            "enabled": false
+        },
+        "lang-powershell.instructions.md": {
+            "enabled": false
+        },
+        "lang-python.instructions.md": {
+            "enabled": false
+        },
+        "lang-ruby.instructions.md": {
+            "enabled": false
+        },
+        "lang-rust.instructions.md": {
+            "enabled": false
+        },
+        "lang-scala.instructions.md": {
+            "enabled": false
+        },
+        "lang-swift.instructions.md": {
+            "enabled": false
+        },
+        "lang-vbnet.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-maui.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-aspnetcore.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-aspx.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-async-await.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-blazor.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-coding-standards.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-core.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-dapper.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-debugging.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-entity-framework-core.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-grpc.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-mediator-cqrs.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-mongodb.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-mstest.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-mysql.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-nuget.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-nunit.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-oracle.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-performance-memory.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-postgresql.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-razor.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-redis.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-signalr.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-sql-server.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-sqlite.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-testing.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-unity.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-winforms.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-wpf.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-xaml.instructions.md": {
+            "enabled": false
+        },
+        "dotnet-xunit.instructions.md": {
+            "enabled": false
+        },
+        "web-angular.instructions.md": {
+            "enabled": false
+        },
+        "web-cypress.instructions.md": {
+            "enabled": false
+        },
+        "web-jasmine.instructions.md": {
+            "enabled": false
+        },
+        "web-jest.instructions.md": {
+            "enabled": false
+        },
+        "web-mocha.instructions.md": {
+            "enabled": false
+        },
+        "web-playwright.instructions.md": {
+            "enabled": false
+        },
+        "web-svelte.instructions.md": {
+            "enabled": false
+        },
+        "web-vue.instructions.md": {
+            "enabled": false
+        },
+        "docker.instructions.md": {
+            "enabled": false
+        }
+    },
+    "mcpTools": {
+        "analyze_csharp_code": {
+            "disabledTasks": [
+                "analyze_csharp_async_patterns",
+                "analyze_csharp_coding_style",
+                "analyze_csharp_member_ordering",
+                "analyze_csharp_naming_conventions",
+                "analyze_csharp_nullable_context",
+                "analyze_csharp_project_structure",
+                "analyze_csharp_test_style"
+            ]
+        },
+        "analyze_nuget_references": {
+            "disabledTasks": [
+                "analyze_nuget_hygiene"
+            ]
+        }
+    }
+}

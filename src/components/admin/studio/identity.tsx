@@ -154,7 +154,7 @@ export function IdentityTab({ draft, doc, urdu }: TabProps) {
               <label key={lang} className="flex items-center gap-2 text-[15px]">
                 <input
                   type="checkbox"
-                  className="size-4 accent-[var(--accent)]"
+                  className="size-4 accent-accent"
                   checked={languages.includes(lang)}
                   onChange={(e) =>
                     set((d) => {

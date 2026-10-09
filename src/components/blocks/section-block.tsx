@@ -16,8 +16,8 @@ export function SectionBlock({ sectionKey }: { sectionKey: string }) {
   const s = section(sectionKey);
   if (!s || !s.items.length) return null;
   return (
-    <section aria-label={s.title} className="space-y-2">
-      <div className="eyebrow px-1">{s.title}</div>
+    <section aria-label={s.title} className="space-y-3">
+      <h2 className="public-section-title px-1 font-semibold tracking-tight">{s.title}</h2>
       <SectionBody s={s} />
     </section>
   );
@@ -69,7 +69,7 @@ function Facts({ items }: { items: ClientItem[] }) {
       {items.map((it) => (
         <div key={it.id} data-gs="row" className="flex flex-col gap-1 px-4 py-3 sm:flex-row sm:gap-5 md:px-5">
           <dt className="shrink-0 text-sm font-semibold sm:w-44">{it.label}</dt>
-          <dd className="text-[15px] leading-relaxed text-muted">
+          <dd className="public-copy text-muted">
             <RichText text={it.value ?? it.text ?? ""} />
             {it.meta && <span className="block text-sm text-faint">{it.meta}</span>}
           </dd>
@@ -81,7 +81,7 @@ function Facts({ items }: { items: ClientItem[] }) {
 
 function Paragraphs({ items }: { items: ClientItem[] }) {
   return (
-    <div className="card space-y-5 p-5 text-[16px] leading-relaxed md:p-6">
+    <div className="card public-copy space-y-5 p-4 sm:p-5 md:p-6">
       {items.map((it) => (
         <div key={it.id} data-gs="row">
           {it.label && <h4 className="mb-1.5 font-semibold">{it.label}</h4>}
@@ -96,7 +96,7 @@ function List({ items }: { items: ClientItem[] }) {
   return (
     <ul className="card divide-y divide-line">
       {items.map((it) => (
-        <li key={it.id} data-gs="row" className="px-5 py-3.5 text-[16px] leading-relaxed md:px-6">
+        <li key={it.id} data-gs="row" className="public-copy px-4 py-3.5 sm:px-5 md:px-6">
           {it.label && <span className="font-semibold">{it.label}: </span>}
           <RichText text={it.text ?? it.value ?? ""} />
         </li>
@@ -111,19 +111,19 @@ function Timeline({ items }: { items: ClientItem[] }) {
       <span data-gs="line" aria-hidden="true" className="absolute top-1 bottom-1 left-0 w-px bg-line" />
       {items.map((it) => (
         <li key={it.id} className="relative">
-          <span data-gs="dot" className="absolute top-2 -left-[29px] size-2.5 rounded-full bg-accent ring-4 ring-bg md:-left-[37px]" />
+          <span data-gs="dot" className="absolute top-2 -left-7.25 size-2.5 rounded-full bg-accent ring-4 ring-bg md:-left-9.25" />
           <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <h3 className="display text-xl md:text-2xl">{it.label}</h3>
-            {it.period && <span className="text-sm font-medium text-faint">{it.period}</span>}
+            <h3 className="display public-item-title">{it.label}</h3>
+            {it.period && <span className="public-meta font-medium text-faint">{it.period}</span>}
           </div>
-          {it.meta && <p className="mt-1 text-[15px] font-semibold text-muted">{it.meta}</p>}
+          {it.meta && <p className="public-meta mt-1 font-semibold text-muted">{it.meta}</p>}
           {(it.text || it.value) && (
-            <div className="mt-2 text-[16px] leading-relaxed">
+            <div className="public-copy mt-2">
               <Text text={it.text ?? it.value ?? ""} />
             </div>
           )}
           {it.details && it.details.length > 0 && (
-            <ul className="mt-3 list-disc space-y-1.5 pl-5 text-[16px] leading-relaxed marker:text-faint">
+            <ul className="public-copy mt-3 list-disc space-y-1.5 pl-5 marker:text-faint">
               {it.details.map((d) => (
                 <li key={d}>
                   <RichText text={d} />
@@ -137,12 +137,12 @@ function Timeline({ items }: { items: ClientItem[] }) {
                 <details key={sub.title} data-gs="row" className="group border-l-2 border-line pl-4 open:border-accent/60 md:pl-5">
                   <summary className="flex cursor-pointer items-start justify-between gap-3 rounded-lg py-2 pr-1">
                     <div className="min-w-0">
-                      <div className="text-[17px] font-semibold">{sub.title}</div>
+                      <div className="public-copy font-semibold">{sub.title}</div>
                       <div className="text-sm text-muted">{[sub.meta, sub.period].filter(Boolean).join(" · ")}</div>
                     </div>
                     <ChevronDown className="mt-1 size-5 shrink-0 text-faint transition-transform group-open:rotate-180" />
                   </summary>
-                  <ul className="list-disc space-y-1.5 pt-1 pb-3 pl-5 text-[16px] leading-relaxed marker:text-faint">
+                  <ul className="public-copy list-disc space-y-1.5 pt-1 pb-3 pl-5 marker:text-faint">
                     {sub.details.map((d) => (
                       <li key={d}>
                         <RichText text={d} />
@@ -165,7 +165,7 @@ function TagGroups({ items }: { items: ClientItem[] }) {
     <div className="card divide-y divide-line">
       {items.map((it) => (
         <section key={it.id} data-gs="row" className="flex flex-col gap-2.5 p-4 sm:flex-row sm:gap-5 md:px-5">
-          {it.label && <h3 className="shrink-0 text-[15px] font-semibold sm:w-36 sm:pt-0.5">{it.label}</h3>}
+          {it.label && <h3 className="public-meta shrink-0 font-semibold sm:w-36 sm:pt-0.5">{it.label}</h3>}
           <Tags items={it.tags ?? []} />
         </section>
       ))}
@@ -175,20 +175,20 @@ function TagGroups({ items }: { items: ClientItem[] }) {
 
 function Gallery({ items }: { items: ClientItem[] }) {
   const { fileHref } = usePersona();
-  const shown = items.filter((it) => it.src);
+  const shown = items.filter((it): it is ClientItem & { src: string } => !!it.src);
   return (
-    <ul className={cn("grid gap-3", shown.length > 1 && "grid-cols-2")}>
+    <ul className={cn("grid gap-3", shown.length > 1 && "sm:grid-cols-2")}>
       {shown.map((it) => (
         <li key={it.id} data-gs="pop" className="card overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={fileHref(it.src!)}
+            src={fileHref(it.src)}
             alt={it.label ?? it.text ?? ""}
             width={it.width}
             height={it.height}
             loading="lazy"
             decoding="async"
-            className="aspect-[3/4] w-full object-cover"
+            className="aspect-3/4 w-full object-cover"
           />
           {(it.label || it.text) && <p className="px-3 py-2 text-sm text-muted">{it.label ?? it.text}</p>}
         </li>
@@ -202,7 +202,7 @@ function Quotes({ items }: { items: ClientItem[] }) {
     <div className="space-y-3">
       {items.map((it) => (
         <figure key={it.id} data-gs="row" className="card p-5 md:p-6">
-          <blockquote className="font-serif text-[1.25rem] leading-[1.4] md:text-[1.45rem]">&ldquo;{it.text ?? it.value}&rdquo;</blockquote>
+          <blockquote className="public-quote font-serif">&ldquo;{it.text ?? it.value}&rdquo;</blockquote>
           {(it.label || it.meta) && (
             <figcaption className="mt-4 text-sm leading-snug">
               {it.label && <span className="block font-semibold">{it.label}</span>}

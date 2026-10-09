@@ -55,26 +55,28 @@ export default async function ProjectsPage() {
       <Breadcrumbs trail={trail} />
       <PageHead eyebrow="Work" title="Projects" intro={cv.profile || undefined} />
 
-        {cv.projects.length > 0 && <ul className="space-y-4">
-        {cv.projects.map((project, i) => (
-          <li key={`${i}-${project.name}`}>
-            <article className="card group relative p-5 transition-colors hover:bg-bg-soft md:p-6">
-              <p className="eyebrow">{project.meta}</p>
-              <h2 className="display mt-2 text-2xl">
-                {projects[i] ? (
-                  <Link href={`/projects/${projects[i].id}/`} className="after:absolute after:inset-0 after:rounded-[inherit]">
-                    {project.name}
-                  </Link>
-                ) : (
-                  project.name
-                )}
-              </h2>
-              <p className="mt-2 leading-relaxed text-muted">{project.text}</p>
-              <ArrowUpRight className="absolute top-5 right-5 size-5 text-faint transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-            </article>
-          </li>
-        ))}
-      </ul>}
+      {cv.projects.length > 0 && (
+        <ul className="public-list-flow-tight">
+          {cv.projects.map((project, i) => (
+            <li key={`${i}-${project.name}`}>
+              <article className="card group relative p-4 transition-colors hover:bg-bg-soft sm:p-5 md:p-6">
+                <p className="eyebrow">{project.meta}</p>
+                <h2 className="display public-section-title mt-2 pr-7">
+                  {projects[i] ? (
+                    <Link href={`/projects/${projects[i].id}/`} className="after:absolute after:inset-0 after:rounded-[inherit]">
+                      {project.name}
+                    </Link>
+                  ) : (
+                    project.name
+                  )}
+                </h2>
+                <p className="public-copy mt-2 text-muted">{project.text}</p>
+                <ArrowUpRight className="absolute top-4 right-4 size-5 text-faint transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:top-5 sm:right-5" aria-hidden="true" />
+              </article>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }

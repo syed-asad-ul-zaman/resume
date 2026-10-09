@@ -55,7 +55,7 @@ export function SendError({ message }: { message?: string }) {
 
 /** Hidden field real people never fill; bots usually do. */
 const Honeypot = ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
-  <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+  <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
     <label>
       Website
       <input tabIndex={-1} autoComplete="off" value={value} onChange={(e) => onChange(e.target.value)} name="website" />

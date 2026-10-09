@@ -109,7 +109,7 @@ export function RequestAccess({ compact }: { compact?: boolean }) {
 
       {access.mode === "request" &&
         (state.sent ? (
-          <p role="status" className="flex items-center gap-2 text-[15px] font-medium">
+          <p role="status" className="public-meta flex items-center gap-2 font-medium">
             <Check className="size-5 text-accent" aria-hidden="true" /> {labels.requestSent}
           </p>
         ) : !showForm ? (
@@ -120,7 +120,7 @@ export function RequestAccess({ compact }: { compact?: boolean }) {
           <form onSubmit={request} className="space-y-3 border-t border-line pt-4" noValidate>
             <p className="font-semibold">{labels.requestTitle}</p>
             {access.requestIntro && (
-              <p className="text-[15px] leading-relaxed text-muted">
+              <p className="public-meta leading-relaxed text-muted">
                 <RichText text={access.requestIntro} />
               </p>
             )}

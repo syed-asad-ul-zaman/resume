@@ -167,7 +167,7 @@ export function AssistantMessage({ msg, isLast, onPhase, onAsk, onRegenerate }: 
               </AnimatedBlocks>
             )}
 
-            <motion.div {...appear(intent.blocks.length)} className="mt-3 -ml-[3.375rem] flex items-center gap-0.5 text-faint md:-ml-2.5">
+            <motion.div {...appear(intent.blocks.length)} className="mt-3 -ml-13.5 flex items-center gap-0.5 text-faint md:-ml-2.5">
               <button type="button" className="icon-btn size-9" onClick={copy} aria-label="Copy answer">
                 {copied ? <Check className="size-4 text-accent" /> : <Copy className="size-4" />}
               </button>

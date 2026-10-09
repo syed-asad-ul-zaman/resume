@@ -63,15 +63,15 @@ export default async function ProjectPage(props: Props) {
       <Breadcrumbs trail={trail} />
 
       <article>
-        <header className="mb-10">
+        <header className="public-section">
           <p className="eyebrow">{project.meta}</p>
-          <h1 className="display mt-3 text-4xl md:text-5xl">{project.name}</h1>
-          <p className="mt-4 text-lg leading-relaxed text-muted">{project.text}</p>
+          <h1 className="display public-page-title mt-3">{project.name}</h1>
+          <p className="public-page-intro mt-4 text-muted">{project.text}</p>
         </header>
 
         {tags.length > 0 && (
-          <section aria-labelledby="stack" className="mb-10">
-            <h2 id="stack" className="display text-2xl">
+          <section aria-labelledby="stack" className="public-section">
+            <h2 id="stack" className="display public-section-title">
               Technologies
             </h2>
             <ul className="mt-3 flex flex-wrap gap-1.5">
@@ -85,8 +85,8 @@ export default async function ProjectPage(props: Props) {
         )}
       </article>
 
-      <aside aria-labelledby="more" className="mt-14 border-t border-line pt-8">
-        <h2 id="more" className="display text-xl">
+      <aside aria-labelledby="more" className="mt-10 border-t border-line pt-8">
+        <h2 id="more" className="display public-section-title">
           More projects
         </h2>
         <ul className="mt-4 space-y-3">

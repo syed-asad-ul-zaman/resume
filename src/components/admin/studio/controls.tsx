@@ -167,7 +167,7 @@ export function Toggle({ label, hint, checked, onChange, disabled }: { label: st
   const id = useId();
   return (
     <div className={cn("flex items-start gap-2.5", disabled && "opacity-60")}>
-      <input id={id} type="checkbox" checked={checked} disabled={disabled} onChange={(e) => onChange(e.target.checked)} className="mt-1 size-4 shrink-0 accent-[var(--accent)]" aria-describedby={hint ? `${id}-hint` : undefined} />
+      <input id={id} type="checkbox" checked={checked} disabled={disabled} onChange={(e) => onChange(e.target.checked)} className="mt-1 size-4 shrink-0 accent-accent" aria-describedby={hint ? `${id}-hint` : undefined} />
       <div className="min-w-0">
         <label htmlFor={id} className="text-[15px] font-medium">
           {label}

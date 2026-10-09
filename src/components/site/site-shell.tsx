@@ -93,7 +93,7 @@ export function SiteShell({ p, children }: { p: ResolvedPersona; children: React
         </div>
       </header>
 
-      <main id="main" className="mx-auto w-full max-w-3xl px-5 py-10 md:px-6 md:py-14">
+      <main id="main" className="public-main mx-auto w-full max-w-3xl">
         {children}
       </main>
 
@@ -180,10 +180,10 @@ export function JsonLd({ data }: { data: string }) {
 /** Big page heading + intro, the same on every content page. */
 export function PageHead({ eyebrow, title, intro }: { eyebrow?: string; title: string; intro?: string }) {
   return (
-    <header className="mb-10">
+    <header className="public-section">
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-      <h1 className="display mt-3 text-4xl md:text-5xl">{title}</h1>
-      {intro && <p className="mt-4 text-lg leading-relaxed text-muted">{intro}</p>}
+      <h1 className="display public-page-title mt-3">{title}</h1>
+      {intro && <p className="public-page-intro mt-4 text-muted">{intro}</p>}
     </header>
   );
 }

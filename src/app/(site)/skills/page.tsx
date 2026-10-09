@@ -43,10 +43,10 @@ export default async function SkillsPage() {
       <Breadcrumbs trail={trail} />
       <PageHead eyebrow="Tech stack" title="Skills" intro={cv.profile} />
 
-      {cv.skills.length > 0 && <div className="space-y-8">
+      {cv.skills.length > 0 && <div className="public-list-flow-tight">
         {cv.skills.map((group, i) => (
           <section key={`${i}-${group.k}`} aria-labelledby={`g-${i}`}>
-            <h2 id={`g-${i}`} className="text-lg font-semibold">
+            <h2 id={`g-${i}`} className="public-copy font-semibold">
               {group.k}
             </h2>
             <ul className="mt-3 flex flex-wrap gap-1.5">
@@ -60,8 +60,8 @@ export default async function SkillsPage() {
         ))}
       </div>}
 
-      {cloudSkills.length > 0 && <section id="cloud" aria-labelledby="cloud-h" className="mt-14 scroll-mt-24">
-        <h2 id="cloud-h" className="display text-2xl">
+      {cloudSkills.length > 0 && <section id="cloud" aria-labelledby="cloud-h" className="public-section mt-12 scroll-mt-24">
+        <h2 id="cloud-h" className="display public-section-title">
           Cloud and DevOps in practice
         </h2>
         <dl className="mt-4 divide-y divide-line">
@@ -74,7 +74,7 @@ export default async function SkillsPage() {
         </dl>
       </section>}
 
-      {(cv.projects.length > 0 || cv.experience.length > 0) && <p className="mt-12 text-sm">
+      {(cv.projects.length > 0 || cv.experience.length > 0) && <p className="mt-10 text-sm">
         See these skills at work in my <Link href="/projects/" className="font-semibold underline-offset-4 hover:underline">projects</Link> and{" "}
         <Link href="/experience/" className="font-semibold underline-offset-4 hover:underline">experience</Link>.
       </p>}

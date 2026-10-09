@@ -70,24 +70,24 @@ export default async function ContactPage() {
       <Breadcrumbs trail={trail} />
       <PageHead eyebrow="Hire me" title="Contact and hiring" intro={intro || undefined} />
 
-      {cv.availability && <section aria-labelledby="looking" className="mb-12">
-        <h2 id="looking" className="display text-2xl">
+      {cv.availability && <section aria-labelledby="looking" className="public-section">
+        <h2 id="looking" className="display public-section-title">
           Availability
         </h2>
         <p className="mt-4 leading-relaxed text-muted">{cv.availability}</p>
       </section>}
 
-      {rows.length > 0 && <section aria-labelledby="reach" className="mb-12">
-        <h2 id="reach" className="display text-2xl">
+      {rows.length > 0 && <section aria-labelledby="reach" className="public-section">
+        <h2 id="reach" className="display public-section-title">
           How to reach me
         </h2>
         <ul className="mt-4 divide-y divide-line">
           {rows.map((r) => (
-            <li key={r.label} className="flex items-center gap-3 py-3">
+            <li key={r.label} className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1 py-3">
               <r.icon className="size-5 shrink-0 text-faint" />
-              <span className="w-36 shrink-0 text-sm text-muted">{r.label}</span>
+              <span className="public-meta w-24 shrink-0 text-muted sm:w-36">{r.label}</span>
               {r.href ? (
-                <a href={r.href} target={r.href.startsWith("http") ? "_blank" : undefined} rel={r.href.startsWith("http") ? "me noreferrer" : undefined} className="min-w-0 truncate font-semibold hover:underline">
+                <a href={r.href} target={r.href.startsWith("http") ? "_blank" : undefined} rel={r.href.startsWith("http") ? "me noreferrer" : undefined} className="min-w-0 flex-1 break-all font-semibold hover:underline">
                   {r.value}
                 </a>
               ) : (
@@ -102,7 +102,7 @@ export default async function ContactPage() {
       </section>}
 
       <section id="message" aria-labelledby="message-h" className="scroll-mt-24">
-        <h2 id="message-h" className="display mb-4 text-2xl">
+        <h2 id="message-h" className="display public-section-title mb-4">
           Send a message
         </h2>
         <ContactForm />

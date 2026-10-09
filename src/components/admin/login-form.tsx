@@ -228,7 +228,7 @@ export function LoginForm({ next, pendingCode, configured }: { next: string; pen
               <FieldError id={ids.passwordErr} message={fieldErr.password} />
             </div>
             <label className="flex items-center gap-2.5 text-sm pointer-coarse:min-h-11">
-              <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="size-4 accent-[var(--accent)]" />
+              <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="size-4 accent-accent" />
               Remember this device for 30 days
             </label>
             {problem && <SendError message={blocked ? `${problem.message.replace(/ Try again in .*$/, "")} Try again in ${mmss(blocked)}.` : problem.message} />}

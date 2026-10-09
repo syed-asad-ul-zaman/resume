@@ -360,10 +360,10 @@ export function AdminDashboard({ data: db, labels, personas = [], persona }: Pro
           </div>
           <div className="ml-auto flex shrink-0 items-center gap-1.5">
             <a href={withBase("/admin/personas/")} className="icon-btn" aria-label="Personas" title="Personas: what the site knows and says">
-              <UserRoundPen className="size-[18px]" />
+              <UserRoundPen className="size-4.5" />
             </a>
             <a href={withBase("/admin/settings/")} className="icon-btn" aria-label="Settings" title="Settings: password, devices">
-              <Settings className="size-[18px]" />
+              <Settings className="size-4.5" />
             </a>
             <ThemeToggle />
             <a href={withBase("/api/admin/export/")} className="btn btn-ghost py-2.5 text-sm max-sm:px-3 pointer-coarse:min-h-11 pointer-coarse:min-w-11" aria-label="Export JSON">
@@ -486,7 +486,7 @@ export function AdminDashboard({ data: db, labels, personas = [], persona }: Pro
           </div>
         ) : (
         /* Two panes */
-        <div className="grid min-h-[28rem] flex-1 grid-cols-[minmax(0,1fr)] overflow-hidden rounded-2xl border border-line bg-card lg:grid-cols-[minmax(20rem,26rem)_minmax(0,1fr)]">
+        <div className="grid min-h-112 flex-1 grid-cols-[minmax(0,1fr)] overflow-hidden rounded-2xl border border-line bg-card lg:grid-cols-[minmax(20rem,26rem)_minmax(0,1fr)]">
           {/* List */}
           <div className={cn("min-h-0 min-w-0 border-line lg:border-r", hasDetail && "hidden lg:block")}>
             {tab === "votes" ? (
@@ -734,7 +734,7 @@ function Detail({ item, visitor, now, backRef, onBack, onPick }: { item?: Item; 
           <ol className="relative space-y-1 border-l border-line pl-5">
             {visitor.items.map((it) => (
               <li key={it.id} className="relative">
-                <span className={cn("absolute top-3.5 -left-[25px] size-2 rounded-full ring-4 ring-card", it.id === item?.id ? "bg-accent" : "bg-surface-strong")} />
+                <span className={cn("absolute top-3.5 -left-6.25 size-2 rounded-full ring-4 ring-card", it.id === item?.id ? "bg-accent" : "bg-surface-strong")} />
                 <button type="button" onClick={() => onPick(it.id)} className={cn("w-full rounded-xl px-3 py-2.5 text-left transition-colors hover:bg-bg-soft", it.id === item?.id && "bg-bg-soft")}>
                   <span className="flex flex-wrap items-center gap-2">
                     <KindBadge item={it} />

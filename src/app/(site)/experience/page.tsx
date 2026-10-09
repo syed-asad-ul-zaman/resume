@@ -43,17 +43,17 @@ export default async function ExperiencePage() {
       <Breadcrumbs trail={trail} />
       <PageHead eyebrow="Career" title="Experience" intro={intro || undefined} />
 
-      {cv.experience.length > 0 && <ol className="space-y-12">
+      {cv.experience.length > 0 && <ol className="public-list-flow">
         {cv.experience.map((job, i) => (
           <li key={`${i}-${job.company}`}>
             <article>
               <header className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h2 className="display text-2xl md:text-3xl">
+                <h2 className="display public-section-title">
                   {job.role} <span className="text-muted">· {job.company}</span>
                 </h2>
-                <p className="text-sm font-semibold text-faint">{job.period}</p>
+                <p className="public-meta font-semibold text-faint">{job.period}</p>
               </header>
-              <p className="mt-1 text-sm text-muted">
+              <p className="public-meta mt-1 text-muted">
                 {job.location}
                 {job.context ? ` · ${job.context}` : ""}
               </p>
@@ -66,8 +66,8 @@ export default async function ExperiencePage() {
               {job.engagements.map((e, j) => (
                 <section key={`${j}-${e.title}`} className="mt-6 border-l-2 border-line pl-5">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                    <h3 className="text-lg font-semibold">{e.title}</h3>
-                    <p className="text-sm text-faint">{e.period}</p>
+                    <h3 className="public-copy font-semibold">{e.title}</h3>
+                    <p className="public-meta text-faint">{e.period}</p>
                   </div>
                   <ul className="mt-2 list-disc space-y-1.5 pl-5 leading-relaxed marker:text-faint">
                     {e.bullets.map((b) => (
@@ -90,7 +90,7 @@ export default async function ExperiencePage() {
         ))}
       </ol>}
 
-      {cv.experience.length > 0 && <p className="mt-12 text-sm">
+      {cv.experience.length > 0 && <p className="mt-10 text-sm">
         The work above in detail: <Link href="/projects/" className="font-semibold underline-offset-4 hover:underline">projects and case studies</Link>, or
         the <Link href="/cv/" className="font-semibold underline-offset-4 hover:underline">full CV</Link>.
       </p>}

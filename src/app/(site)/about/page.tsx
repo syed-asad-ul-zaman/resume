@@ -53,7 +53,7 @@ export default async function AboutPage() {
       <PageHead eyebrow={cv.title || undefined} title={`About ${identity.name}`} intro={cv.profile || undefined} />
 
       {cv.showPhoto && photoSrc && (
-        <figure className="mb-12 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+        <figure className="public-section flex flex-col items-start gap-5 sm:flex-row sm:items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={withBase(photoSrc)}
@@ -71,21 +71,21 @@ export default async function AboutPage() {
         </figure>
       )}
 
-      {cv.highlights.length > 0 && <section aria-labelledby="numbers" className="mb-12">
-        <h2 id="numbers" className="display text-2xl">
+      {cv.highlights.length > 0 && <section aria-labelledby="numbers" className="public-section">
+        <h2 id="numbers" className="display public-section-title">
           Highlights
         </h2>
         <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
           {cv.highlights.map((highlight, i) => (
             <li key={`${i}-${highlight}`} className="card p-4">
-              <p className="text-sm leading-relaxed">{highlight}</p>
+              <p className="public-meta leading-relaxed">{highlight}</p>
             </li>
           ))}
         </ul>
       </section>}
 
-      {cv.skills.length > 0 && <section aria-labelledby="what" className="mb-12">
-        <h2 id="what" className="display text-2xl">
+      {cv.skills.length > 0 && <section aria-labelledby="what" className="public-section">
+        <h2 id="what" className="display public-section-title">
           What I do
         </h2>
         <dl className="mt-4 divide-y divide-line">
@@ -104,13 +104,13 @@ export default async function AboutPage() {
       </section>}
 
       {visibleBeliefs.length > 0 && (
-        <section id="beliefs" aria-labelledby="beliefs-h" className="mb-12 scroll-mt-24">
-          <h2 id="beliefs-h" className="display text-2xl">
+        <section id="beliefs" aria-labelledby="beliefs-h" className="public-section scroll-mt-24">
+          <h2 id="beliefs-h" className="display public-section-title">
             What I believe
           </h2>
           <ul className="mt-4 space-y-2">
             {visibleBeliefs.map((belief, i) => (
-              <li key={`${i}-${belief}`} className="font-serif text-xl leading-snug">
+              <li key={`${i}-${belief}`} className="public-quote font-serif">
                 &ldquo;{belief}&rdquo;
               </li>
             ))}
@@ -118,8 +118,8 @@ export default async function AboutPage() {
         </section>
       )}
 
-      {Object.values(cv.education).some((value) => value.trim()) || cv.courses.length > 0 ? <section id="education" aria-labelledby="education-h" className="mb-12 scroll-mt-24">
-        <h2 id="education-h" className="display text-2xl">
+      {Object.values(cv.education).some((value) => value.trim()) || cv.courses.length > 0 ? <section id="education" aria-labelledby="education-h" className="public-section scroll-mt-24">
+        <h2 id="education-h" className="display public-section-title">
           Education
         </h2>
         <div className="mt-4">

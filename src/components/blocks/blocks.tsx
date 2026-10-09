@@ -118,7 +118,7 @@ function Stats() {
     return (
       <ul className="grid gap-3 md:grid-cols-2">
         {legacyCv.highlights.map((highlight, i) => (
-          <li key={`${i}-${highlight}`} data-gs="row" className="card p-4 text-[15px] leading-relaxed md:p-5">
+          <li key={`${i}-${highlight}`} data-gs="row" className="card public-copy p-4 md:p-5">
             {highlight}
           </li>
         ))}
@@ -129,8 +129,8 @@ function Stats() {
     <ul className="grid grid-cols-2 gap-3 md:grid-cols-3">
       {profile.stats.map((s) => (
         <li key={s.label} data-gs="pop" className="card p-4 md:p-5">
-          <div data-gs="count" className="display text-4xl tabular-nums md:text-[2.6rem]">{s.value}</div>
-          <div className="mt-2 text-sm leading-snug text-muted">{s.label}</div>
+          <div data-gs="count" className="display public-stat-number tabular-nums">{s.value}</div>
+          <div className="public-meta mt-2 leading-snug text-muted">{s.label}</div>
         </li>
       ))}
     </ul>
@@ -141,7 +141,7 @@ function Focus() {
   const { legacyCv } = usePersona();
   if (legacyCv) {
     return (
-      <div className="card p-4 text-[15px] leading-relaxed text-muted md:p-5">
+      <div className="card public-copy p-4 text-muted md:p-5">
         {legacyCv.profile}
       </div>
     );
@@ -151,7 +151,7 @@ function Focus() {
       {profile.focus.map((f) => (
         <li key={f.area} data-gs="row" className="flex flex-col gap-1 p-4 sm:flex-row sm:gap-5 md:px-5">
           <span className="shrink-0 font-semibold sm:w-36">{f.area}</span>
-          <span className="text-[15px] leading-relaxed text-muted">{f.text}</span>
+          <span className="public-copy text-muted">{f.text}</span>
         </li>
       ))}
     </ul>
@@ -175,16 +175,16 @@ function Experience() {
       <span data-gs="line" aria-hidden="true" className="absolute top-1 bottom-1 left-0 w-px bg-line" />
       {jobs.map((job) => (
         <li key={job.company} className="relative">
-          <span data-gs="dot" className="absolute top-2 -left-[29px] size-2.5 rounded-full bg-accent ring-4 ring-bg md:-left-[37px]" />
+          <span data-gs="dot" className="absolute top-2 -left-7.25 size-2.5 rounded-full bg-accent ring-4 ring-bg md:-left-9.25" />
           <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <h3 className="display text-2xl md:text-[1.7rem]">{job.company}</h3>
-            <span className="text-sm font-medium text-faint">{job.period}</span>
+            <h3 className="display public-item-title">{job.company}</h3>
+            <span className="public-meta font-medium text-faint">{job.period}</span>
           </div>
           <p className="mt-1 font-semibold">
             {job.role} <span className="font-normal text-muted">· {job.location}</span>
           </p>
-          {job.context && <p className="text-sm text-muted">{job.context}</p>}
-          <ul className="mt-3 list-disc space-y-1.5 pl-5 text-[16px] leading-relaxed marker:text-faint">
+          {job.context && <p className="public-meta text-muted">{job.context}</p>}
+          <ul className="public-copy mt-3 list-disc space-y-1.5 pl-5 marker:text-faint">
             {job.bullets.map((b) => (
               <li key={b}>{b}</li>
             ))}
@@ -195,15 +195,15 @@ function Experience() {
                 <details key={e.title} data-gs="row" className="group border-l-2 border-line pl-4 open:border-accent/60 md:pl-5">
                   <summary className="flex cursor-pointer items-start justify-between gap-3 rounded-lg py-2 pr-1">
                     <div className="min-w-0">
-                      <div className="text-[17px] font-semibold">{e.title}</div>
-                      <div className="text-sm text-muted">
+                      <div className="public-copy font-semibold">{e.title}</div>
+                      <div className="public-meta text-muted">
                         {e.role} · {e.period}
                       </div>
                     </div>
                     <ChevronDown className="mt-1 size-5 shrink-0 text-faint transition-transform group-open:rotate-180" />
                   </summary>
                   <div className="pt-1 pb-3">
-                    <ul className="list-disc space-y-1.5 pl-5 text-[16px] leading-relaxed marker:text-faint">
+                    <ul className="public-copy list-disc space-y-1.5 pl-5 marker:text-faint">
                       {e.bullets.map((b) => (
                         <li key={b}>{b}</li>
                       ))}
@@ -231,8 +231,8 @@ function ProjectGrid({ onAsk }: { onAsk: Ask }) {
           <>
             <div className="min-w-0 flex-1">
               {p.meta && <div className="eyebrow">{p.meta}</div>}
-              <h3 className="display mt-2 text-[1.5rem] md:text-[1.7rem]">{p.name}</h3>
-              <p className="mt-1.5 text-[15px] leading-relaxed text-muted md:text-base">{p.text}</p>
+              <h3 className="display public-item-title mt-2">{p.name}</h3>
+              <p className="public-copy mt-1.5 text-muted">{p.text}</p>
               <Tags items={p.meta.split(",").map((tag) => tag.trim()).filter(Boolean).slice(0, 6)} className="mt-3" />
             </div>
             {projectId && (
@@ -242,7 +242,7 @@ function ProjectGrid({ onAsk }: { onAsk: Ask }) {
             )}
           </>
         );
-        const className = "card group flex w-full items-start gap-4 p-5 text-left md:p-6";
+        const className = "card group flex w-full items-start gap-4 p-4 text-left sm:p-5 md:p-6";
         return projectId ? (
           <IntentLink key={`${i}-${p.name}`} intentId={`project-${projectId}`} onPick={onAsk} aria-label={`${p.name}: read the full story`} data-gs="row" className={`${className} transition-colors hover:border-surface-strong hover:bg-bg-soft`}>
             {content}
@@ -266,8 +266,8 @@ function ProjectDetail({ id }: { id: string }) {
       <article className="card overflow-hidden">
         <header className="border-b border-line bg-bg-soft p-5 md:p-6">
           {current.meta && <div className="eyebrow">{current.meta}</div>}
-          <h3 className="display mt-2 text-3xl md:text-4xl">{current.name}</h3>
-          <p className="mt-2 text-muted">{current.text}</p>
+          <h3 className="display public-section-title mt-2">{current.name}</h3>
+          <p className="public-copy mt-2 text-muted">{current.text}</p>
         </header>
         {current.meta && (
           <div className="p-5 md:p-6">
@@ -285,13 +285,13 @@ function ProjectDetail({ id }: { id: string }) {
         <div className="eyebrow">
           {p.kind} · {p.year}
         </div>
-        <h3 className="display mt-2 text-3xl md:text-4xl">{p.name}</h3>
-        <p className="mt-2 text-muted">{p.problem}</p>
+        <h3 className="display public-section-title mt-2">{p.name}</h3>
+        <p className="public-copy mt-2 text-muted">{p.problem}</p>
       </header>
       <div className="space-y-5 p-5 md:p-6">
         <div>
           <div className="eyebrow mb-2">What I built</div>
-          <ul className="list-disc space-y-1.5 pl-5 text-[16px] leading-relaxed marker:text-accent">
+          <ul className="public-copy list-disc space-y-1.5 pl-5 marker:text-accent">
             {p.built.map((b) => (
               <li key={b} data-gs="row">
                 {b}
@@ -315,7 +315,7 @@ function ProjectDetail({ id }: { id: string }) {
 function Figures({ items }: { items: readonly string[] }) {
   return (
     // Separators are drawn by .dot-list (CSS) so one never dangles at the end or start of a line.
-    <p className="dot-list text-[15px] text-muted">
+    <p className="dot-list public-meta text-muted">
       {items.map((n) => {
         const [head, ...rest] = n.split(" ");
         const numeric = /\d/.test(head);
@@ -344,7 +344,7 @@ function Skills() {
     <div className="card divide-y divide-line">
       {groups.map((g, i) => (
         <section key={`${i}-${g.group}`} data-gs="row" className="flex flex-col gap-2.5 p-4 sm:flex-row sm:gap-5 md:px-5">
-          <h3 className="shrink-0 text-[15px] font-semibold sm:w-36 sm:pt-0.5">{g.group}</h3>
+          <h3 className="public-meta shrink-0 font-semibold sm:w-36 sm:pt-0.5">{g.group}</h3>
           <Tags items={g.items} />
         </section>
       ))}
@@ -362,7 +362,7 @@ function CloudList() {
       {entries.map((c) => (
         <li key={c.name} data-gs="row" className="flex flex-col gap-0.5 px-4 py-3 sm:flex-row sm:items-baseline sm:gap-4 md:px-5">
           <span className="font-semibold sm:w-56 sm:shrink-0">{c.name}</span>
-          <span className="text-[15px] text-muted">{c.where}</span>
+          <span className="public-meta text-muted">{c.where}</span>
         </li>
       ))}
     </ul>
@@ -377,9 +377,9 @@ function Education() {
     <div className="space-y-3">
       <article className="card p-5 md:p-6">
         <div className="eyebrow">{education.year}</div>
-        <h3 className="display mt-2 text-2xl md:text-3xl">{education.degree}</h3>
+        <h3 className="display public-section-title mt-2">{education.degree}</h3>
         <p className="mt-1 font-semibold text-muted">{education.school}</p>
-        {education.note && <p className="mt-4 text-[16px]">{education.note}</p>}
+        {education.note && <p className="public-copy mt-4">{education.note}</p>}
       </article>
       {courses.length > 0 && (
         <div className="card p-5 md:p-6">
@@ -496,21 +496,21 @@ function HireMe() {
       <div className="grid gap-px bg-line sm:grid-cols-2">
         <div data-gs="pop" className="bg-card p-4 md:p-5">
           <div className="eyebrow">Role</div>
-          <div className="mt-1.5 text-[15px] leading-snug font-semibold">{legacyCv.title}</div>
+          <div className="public-copy mt-1.5 leading-snug font-semibold">{legacyCv.title}</div>
         </div>
         <div data-gs="pop" className="bg-card p-4 md:p-5">
           <div className="eyebrow">Availability</div>
-          <div className="mt-1.5 text-[15px] leading-snug font-semibold">{legacyCv.availability}</div>
+          <div className="public-copy mt-1.5 leading-snug font-semibold">{legacyCv.availability}</div>
         </div>
       </div>
-      {legacyCv.profile && <p className="border-t border-line p-4 text-[15px] leading-relaxed text-muted md:p-5">{legacyCv.profile}</p>}
+      {legacyCv.profile && <p className="public-copy border-t border-line p-4 text-muted md:p-5">{legacyCv.profile}</p>}
       <div className="border-t border-line">
         <div className="eyebrow px-4 pt-4 md:px-5">What I bring</div>
         <dl className="divide-y divide-line">
           {legacyCv.skills.map((skill, i) => (
             <div key={`${skill.k}-${i}`} data-gs="row" className="flex flex-col gap-1 px-4 py-3 sm:flex-row sm:gap-5 md:px-5">
               <dt className="shrink-0 text-sm font-semibold sm:w-44">{skill.k}</dt>
-              <dd className="text-[15px] leading-relaxed text-muted">{skill.v}</dd>
+              <dd className="public-copy text-muted">{skill.v}</dd>
             </div>
           ))}
         </dl>

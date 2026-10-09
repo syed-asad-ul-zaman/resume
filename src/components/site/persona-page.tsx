@@ -44,8 +44,8 @@ export async function PersonaPage({ p, pageKey }: { p: ResolvedPersona; pageKey:
       <PageHead eyebrow={doc.identity.name} title={page.section.title} />
       <SectionBody s={page.section} />
       {related.length > 0 && (
-        <section aria-labelledby="related" className="mt-12 space-y-4">
-          <h2 id="related" className="text-xl font-semibold tracking-tight">
+        <section aria-labelledby="related" className="public-section mt-10 space-y-4">
+          <h2 id="related" className="public-section-title font-semibold tracking-tight">
             {labels.askAbout}
           </h2>
           <ul className="space-y-3">
@@ -54,7 +54,7 @@ export async function PersonaPage({ p, pageKey }: { p: ResolvedPersona; pageKey:
                 <a href={withBase(personaPath(p, `/ask/${q.id}/`))} className="font-semibold hover:underline">
                   {lt(q.prompt, p.lang)}
                 </a>
-                <p className="mt-1 text-[15px] text-muted">
+                <p className="public-meta mt-1 text-muted">
                   <RichText text={lt(q.answers[0], p.lang)} />
                 </p>
               </li>
@@ -92,7 +92,7 @@ function DocumentPage({ p }: { p: ResolvedPersona }) {
   const photo = doc.document.showPhoto ? doc.identity.photos.find((ph) => visibleAt(ph.visibility, p.tier)) : undefined;
   const pdf = p.compiled.pdfPath ? withBase(`${p.base}${documentPdfPath(doc)}`) : undefined;
   return (
-    <article className="biodata space-y-8">
+    <article className="biodata public-biodata">
       <header className="flex flex-wrap items-start gap-5">
         {photo && (
           // eslint-disable-next-line @next/next/no-img-element
@@ -100,7 +100,7 @@ function DocumentPage({ p }: { p: ResolvedPersona }) {
         )}
         <div className="min-w-0 flex-1">
           <p className="eyebrow">{title}</p>
-          <h1 className="display mt-2 text-4xl">{doc.identity.name}</h1>
+          <h1 className="display public-page-title mt-2">{doc.identity.name}</h1>
           {(doc.identity.role || doc.identity.location) && <p className="mt-2 text-lg text-muted">{[lt(doc.identity.role, p.lang), lt(doc.identity.location, p.lang)].filter(Boolean).join(" · ")}</p>}
           {doc.document.updated && <p className="mt-1 text-sm text-faint">{doc.document.updated}</p>}
         </div>
@@ -115,7 +115,7 @@ function DocumentPage({ p }: { p: ResolvedPersona }) {
       </header>
       {sections.map((s) => (
         <section key={s.key} aria-labelledby={`doc-${s.key}`} className="break-inside-avoid-page space-y-3">
-          <h2 id={`doc-${s.key}`} className="border-b border-line pb-1.5 text-lg font-semibold tracking-tight">
+          <h2 id={`doc-${s.key}`} className="public-section-title border-b border-line pb-1.5 font-semibold tracking-tight">
             {s.title}
           </h2>
           <SectionBody s={s} />

@@ -203,6 +203,60 @@
     text-transform: uppercase;
     color: var(--faint);
   }
+  .public-main {
+    padding-block: clamp(2.5rem, 5vw, 3.5rem);
+    padding-inline: clamp(1.25rem, 4vw, 1.5rem);
+    font-size: clamp(1rem, 0.975rem + 0.2vw, 1.125rem);
+  }
+  .public-page-title {
+    font-size: clamp(2.25rem, 1.45rem + 3.2vw, 3.5rem);
+    line-height: 1.04;
+  }
+  .public-page-intro {
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+    line-height: 1.65;
+  }
+  .public-section-title {
+    font-size: clamp(1.4rem, 1.15rem + 1.1vw, 1.875rem);
+    line-height: 1.2;
+  }
+  .public-item-title {
+    font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.5rem);
+    line-height: 1.25;
+  }
+  .public-stat-number {
+    font-size: clamp(2rem, 1.5rem + 2vw, 2.625rem);
+    line-height: 1.1;
+  }
+  .public-copy {
+    font-size: clamp(1rem, 0.975rem + 0.2vw, 1.125rem);
+    line-height: 1.7;
+  }
+  .public-quote {
+    font-size: clamp(1.2rem, 1rem + 0.8vw, 1.5rem);
+    line-height: 1.4;
+  }
+  .public-composer-input {
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  }
+  .public-meta {
+    font-size: clamp(0.875rem, 0.84rem + 0.15vw, 0.9375rem);
+  }
+  .public-section {
+    margin-block-end: clamp(2.5rem, 5vw, 3.5rem);
+  }
+  .public-list-flow {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 3.5rem);
+  }
+  .public-list-flow-tight {
+    display: grid;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+  }
+  .public-biodata {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
 }
 
 html,
