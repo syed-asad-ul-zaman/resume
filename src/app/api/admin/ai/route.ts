@@ -1,6 +1,6 @@
 import { normalizeLegacyPersonaDoc, PersonaDocShape } from "@/lib/persona/schema";
 import { SLUG_RE, adminGuard, isResponse } from "@/server/admin-api";
-import { draftAnswer, missingUrdu, structureText, suggestQuestions, translateToUrdu } from "@/server/brain/assist";
+import { MAX_IMPORT_CHARS, draftAnswer, missingUrdu, structureText, suggestQuestions, translateToUrdu } from "@/server/brain/assist";
 import { aiEnabled } from "@/server/brain/model";
 import { bad, json, limited, readJson, str } from "@/server/http";
 import { personaRow } from "@/server/persona/studio";
@@ -29,8 +29,9 @@ export async function POST(req: Request) {
   try {
     switch (body.action) {
       case "structure": {
-        const text = str(body.text, 20_000);
-        if (!text || text.length < 10) return bad("Paste some text first.");
+        const text = typeof body.text === "string" ? body.text.trim() : "";
+        if (text.length < 10) return bad("Paste some text first.");
+        if (text.length > MAX_IMPORT_CHARS) return bad(`That text is ${text.length} characters; the limit is ${MAX_IMPORT_CHARS}. Paste it in parts.`, 422);
         return json({ ok: true, markdown: await structureText(doc, text) });
       }
       case "suggest":

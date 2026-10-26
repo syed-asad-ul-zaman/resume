@@ -15,6 +15,9 @@ import { chatModelId, google } from "./model";
 
 const TIMEOUT_MS = 60_000;
 
+/** Above this, an import is refused and the owner is asked to split it: a silent cut loses facts. */
+export const MAX_IMPORT_CHARS = 20_000;
+
 const TEMPLATE_GUIDE = `THE TEMPLATE (Markdown):
 ## <Section title> (<display>) [<visibility>] {<key>}
   display: facts | paragraphs | list | timeline | tags | gallery | quotes
@@ -80,6 +83,7 @@ const sectionList = (doc: PersonaDoc) =>
  * import preview. Only facts from the text; sensitive details default to [unlocked].
  */
 export async function structureText(doc: PersonaDoc, text: string): Promise<string> {
+  if (text.length > MAX_IMPORT_CHARS) throw new Error(`That text is ${text.length} characters; the limit is ${MAX_IMPORT_CHARS}.`);
   const urdu = doc.site.languages.includes("ur");
   const system = `TASK: structure
 You turn notes about a person into the template below, for their personal website "${doc.name}". Output ONLY the Markdown, no comments.
@@ -94,7 +98,7 @@ ${sectionList(doc)}
 - Keep the owner's wording where it is good; fix spelling. Write in the first person where it is the owner speaking.
 - ${urdu ? 'The site is in English and Urdu: give every label and value both, as "English || اردو" (translate faithfully; keep names, numbers and places as they are).' : "The site is in English: translate any Urdu into English."}
 - Add a "## Questions" part only if the notes contain questions and answers.`;
-  const { text: out } = await call({ system, prompt: text.slice(0, 20_000), maxOutputTokens: 6000, temperature: 0.2 });
+  const { text: out } = await call({ system, prompt: text, maxOutputTokens: 6000, temperature: 0.2 });
   return unfence(out);
 }
 

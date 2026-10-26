@@ -1,7 +1,8 @@
+import { after } from "next/server";
 import { looksLikeAccessCode } from "@/lib/persona/access-code";
 import { answerQuestion, type AiTurn } from "@/server/brain/answer";
 import { aiEnabled } from "@/server/brain/model";
-import { bad, clientKey, consentedVisitor, forbidden, json, limited, newId, overLimit, readJson, recordHit, sameOrigin, str } from "@/server/http";
+import { bad, clientKey, consentedVisitor, forbidden, json, limited, newId, readJson, recordHit, reserve, sameOrigin, str } from "@/server/http";
 import { clientView } from "@/server/persona/compile";
 import { personaForRequest } from "@/server/persona/resolve";
 import { addAiAnswer, type AiAnswerEntry } from "@/server/store";
@@ -30,9 +31,14 @@ function parseHistory(value: unknown): AiTurn[] {
   return turns;
 }
 
-/** Keeps what was asked and answered (the admin's review list), without ever failing the request. */
-const remember = (entry: Omit<AiAnswerEntry, "createdAt" | "reviewedAt" | "promotedTo">) => addAiAnswer(entry).catch((err) => console.error("[ask] Could not save:", err));
-const skip = async () => {};
+/**
+ * Keeps what was asked and answered (the admin's review list), without ever failing the request. Runs
+ * after the response via after(), so a serverless process freezing on return cannot drop the insert.
+ */
+const remember = (entry: Omit<AiAnswerEntry, "createdAt" | "reviewedAt" | "promotedTo">) => {
+  after(() => addAiAnswer(entry).catch((err) => console.error("[ask] Could not save:", err)));
+};
+const skip = () => {};
 
 /**
  * A question none of the written answers matched. Answers with a topic to play, a short AI answer (with
@@ -45,7 +51,6 @@ export async function POST(req: Request) {
   const persona = await personaForRequest(req);
   const { compiled, tier, lang, preview } = persona;
   if (limited(`ask:${compiled.slug}:${clientKey(req)}`, PER_CLIENT.max, PER_CLIENT.windowMs)) return bad("Too many questions at once - please try again in a few minutes.", 429);
-  if (overLimit(DAILY_KEY, dailyLimit(), DAY_MS)) return bad("The AI has answered enough for today - please pick a listed question.", 429);
   const body = await readJson(req, 12_000);
   if (!body) return bad("Invalid request.");
   const question = str(body.question, 300);
@@ -57,6 +62,11 @@ export async function POST(req: Request) {
   const visitor = consentedVisitor(body, req) ?? undefined;
   const who = { persona: compiled.slug, versionId: compiled.versionId ?? undefined, tier, visitor, question };
 
+  // The day's cost cap, claimed before the call: checking alone lets a burst all pass together. A
+  // call that fails gives its place back, because a failed call should not count.
+  const release = reserve(DAILY_KEY, dailyLimit(), DAY_MS);
+  if (!release) return bad("The AI has answered enough for today - please pick a listed question.", 429);
+
   const id = newId();
   const started = Date.now();
   // Questions asked while the admin previews a draft are answered from the draft and not logged.
@@ -65,14 +75,16 @@ export async function POST(req: Request) {
   try {
     outcome = await answerQuestion({ compiled, tier, question, history });
   } catch (err) {
+    release();
     console.error("[ask] AI call failed:", err instanceof Error ? `${err.name}: ${err.message}` : err);
-    await log({ id, ...who, lang, route: "error", ms: Date.now() - started });
+    log({ id, ...who, lang, route: "error", ms: Date.now() - started });
     return bad("Couldn't reach the AI right now - please try a listed question.", 502);
   }
   recordHit(DAILY_KEY, DAY_MS);
+  release();
 
   const { result, meta } = outcome;
-  await log({
+  log({
     id,
     ...who,
     lang: meta.lang ?? lang,

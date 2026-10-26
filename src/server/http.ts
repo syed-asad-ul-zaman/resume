@@ -185,8 +185,10 @@ export function extendedVisitor(value: unknown, req: Request) {
 type Bucket = { times: number[]; windowMs: number };
 const MAX_KEYS = 10_000;
 // Kept on globalThis so every route bundle in this process shares one set of limits.
-const g = globalThis as typeof globalThis & { __rateHits?: Map<string, Bucket> };
+const g = globalThis as typeof globalThis & { __rateHits?: Map<string, Bucket>; __rateInFlight?: Map<string, number> };
 const hits = (g.__rateHits ??= new Map<string, Bucket>());
+// Requests already on their way, per key: checked but not yet recorded (see reserve).
+const inFlight = (g.__rateInFlight ??= new Map<string, number>());
 
 /** Drops keys whose newest hit is older than their window; if still too many, the oldest non-admin keys. */
 function evict(now: number) {
@@ -204,9 +206,28 @@ function recent(key: string, windowMs: number, now: number): number[] {
   return (hits.get(key)?.times ?? []).filter((t) => now - t < windowMs);
 }
 
-/** True when `key` already has `max` or more hits in `windowMs`. Does not record a hit. */
+/** True when `key` already has `max` or more hits in `windowMs`, counting requests still in flight. */
 export function overLimit(key: string, max: number, windowMs: number): boolean {
-  return recent(key, windowMs, Date.now()).length >= max;
+  return recent(key, windowMs, Date.now()).length + (inFlight.get(key) ?? 0) >= max;
+}
+
+/**
+ * Claims a place for a request that is about to do expensive work, so concurrent requests cannot all
+ * pass the same check before any of them is recorded. Returns the release to call exactly once: after
+ * recordHit on success, or alone on failure (a failed call should not count against the limit).
+ * null when the limit is already reached.
+ */
+export function reserve(key: string, max: number, windowMs: number): (() => void) | null {
+  if (overLimit(key, max, windowMs)) return null;
+  inFlight.set(key, (inFlight.get(key) ?? 0) + 1);
+  let released = false;
+  return () => {
+    if (released) return;
+    released = true;
+    const left = (inFlight.get(key) ?? 1) - 1;
+    if (left > 0) inFlight.set(key, left);
+    else inFlight.delete(key);
+  };
 }
 
 /** Records one hit for `key`. */
